@@ -81,7 +81,7 @@ h3{font-size:1.35rem;line-height:1.2}
 .card-head h2{font-size:clamp(1.7rem,2.6vw,2.1rem);color:var(--royal)}
 .stepcount{font-size:.9rem;color:var(--muted);white-space:nowrap}
 .progress{height:4px;border-radius:4px;margin:14px 0 20px;overflow:hidden}
-.progress i{display:block;height:100%;width:33.34%;background:var(--amber);border-radius:4px;transform-origin:left;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.progress i{display:block;height:100%;width:16.67%;background:var(--amber);border-radius:4px;transform-origin:left;transition:width .35s cubic-bezier(.2,.8,.2,1)}
 .step[hidden]{display:none}
 .step legend,.step .q{font:600 1.15rem/1.3 var(--sys);color:var(--ink);margin-bottom:12px;padding:0}
 fieldset{border:0;margin:0;padding:0;min-width:0}
@@ -91,6 +91,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .opt:active{transform:scale(.97)}
 .opt[aria-pressed="true"]{border-color:var(--royal);background:var(--sky-tint)}
 .options.three{grid-template-columns:repeat(3,1fr)}
+.hint{margin:-4px 0 12px;font-size:.95rem;color:var(--muted)}
 .field{display:grid;gap:7px;margin-bottom:14px}
 label{font-weight:600;color:var(--ink)}
 input{font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;min-height:52px;width:100%}
@@ -246,7 +247,7 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
         <p class="sub">Tier 1 panels, inverters and batteries, designed around your home, farm or business.</p>
         <div class="cta">
           <a class="btn btn-amber btn-lg tel" href="tel:+27716088886" data-track="Call_click">Call 071 608 8886</a>
-          <small>or get a free quote in three quick steps</small>
+          <small>or answer a few quick questions for a free quote</small>
         </div>
         <div class="glass"><div class="badge"><img src="https://graaffenkie.co.za/wp-content/uploads/2025/10/PVGC-1.png" width="480" height="121" alt="PV GreenCard registered installer, powered by SAPVIA"></div></div>
       </div>
@@ -254,10 +255,13 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
       <div class="quote-home" id="quote-home">
         <div class="card" id="quote">
           <form id="quote-form" action="mailto:info@graaffenkie.co.za" method="post" enctype="text/plain" novalidate>
-            <div class="card-head"><h2 id="quote-title">Get a free quote</h2><span class="stepcount" id="stepcount" aria-live="polite">Step 1 of 3</span></div>
+            <div class="card-head"><h2 id="quote-title">Get a free quote</h2><span class="stepcount" id="stepcount" aria-live="polite">Step 1 of 6</span></div>
             <div class="progress" aria-hidden="true"><i id="bar"></i></div>
             <input type="hidden" name="need" id="need">
             <input type="hidden" name="property" id="property">
+            <input type="hidden" name="roof" id="roof">
+            <input type="hidden" name="inverter_distance" id="inverter_distance">
+            <input type="hidden" name="monthly_spend" id="monthly_spend">
 
             <div class="step" data-step="1">
               <fieldset><legend>What do you need?</legend>
@@ -282,14 +286,57 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
             </div>
 
             <div class="step" data-step="3" hidden>
+              <fieldset><legend>What type of roof do you have?</legend>
+                <div class="options" data-for="roof">
+                  <button type="button" class="opt" data-value="Corrugated iron or IBR sheeting" aria-pressed="false">Corrugated iron or IBR sheeting</button>
+                  <button type="button" class="opt" data-value="Tiles" aria-pressed="false">Tiles</button>
+                  <button type="button" class="opt" data-value="Flat concrete" aria-pressed="false">Flat concrete</button>
+                  <button type="button" class="opt" data-value="Thatch" aria-pressed="false">Thatch</button>
+                  <button type="button" class="opt" data-value="Ground mount, no roof" aria-pressed="false">Ground mount, no roof</button>
+                  <button type="button" class="opt" data-value="Not sure" aria-pressed="false">Not sure</button>
+                </div>
+              </fieldset>
+              <div class="step-foot"><button type="button" class="back" data-back>Back</button></div>
+            </div>
+
+            <div class="step" data-step="4" hidden>
+              <fieldset><legend>How far will the inverter be from your main distribution board?</legend>
+                <p class="hint">The distribution board (DB) is where your main switch and circuit breakers are.</p>
+                <div class="options" data-for="inverter_distance">
+                  <button type="button" class="opt" data-value="Less than 5 m" aria-pressed="false">Less than 5 m</button>
+                  <button type="button" class="opt" data-value="5 to 10 m" aria-pressed="false">5 to 10 m</button>
+                  <button type="button" class="opt" data-value="10 to 20 m" aria-pressed="false">10 to 20 m</button>
+                  <button type="button" class="opt" data-value="More than 20 m" aria-pressed="false">More than 20 m</button>
+                  <button type="button" class="opt" data-value="Not sure" aria-pressed="false">Not sure</button>
+                </div>
+              </fieldset>
+              <div class="step-foot"><button type="button" class="back" data-back>Back</button></div>
+            </div>
+
+            <div class="step" data-step="5" hidden>
+              <fieldset><legend>How much do you spend on electricity per month?</legend>
+                <div class="options" data-for="monthly_spend">
+                  <button type="button" class="opt" data-value="Less than R1,000" aria-pressed="false">Less than R1,000</button>
+                  <button type="button" class="opt" data-value="R1,000 to R2,500" aria-pressed="false">R1,000 to R2,500</button>
+                  <button type="button" class="opt" data-value="R2,500 to R5,000" aria-pressed="false">R2,500 to R5,000</button>
+                  <button type="button" class="opt" data-value="R5,000 to R10,000" aria-pressed="false">R5,000 to R10,000</button>
+                  <button type="button" class="opt" data-value="More than R10,000" aria-pressed="false">More than R10,000</button>
+                  <button type="button" class="opt" data-value="Not sure" aria-pressed="false">Not sure</button>
+                </div>
+              </fieldset>
+              <div class="step-foot"><button type="button" class="back" data-back>Back</button></div>
+            </div>
+
+            <div class="step" data-step="6" hidden>
               <p class="q">Where can we reach you?</p>
               <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required placeholder="Your name…"><span class="err" id="e-name"></span></div>
               <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 071 123 4567…"><span class="err" id="e-phone"></span></div>
+              <div class="field"><label for="f-address">Address</label><input id="f-address" name="address" autocomplete="street-address" required placeholder="Street, suburb, town…"><span class="err" id="e-address"></span></div>
               <button class="btn btn-amber btn-lg" type="submit" style="width:100%">Get my free quote</button>
               <div class="step-foot"><button type="button" class="back" data-back>Back</button></div>
             </div>
 
-            <div class="step done" data-step="4" hidden tabindex="-1">
+            <div class="step done" data-step="7" hidden tabindex="-1">
               <h3>Thanks, your request is in</h3>
               <p id="done-msg">Graaff &amp; Kie will get back to you with an estimate.</p>
             </div>
@@ -353,7 +400,7 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
       <div>
         <h2>How it works</h2>
         <ol class="steps">
-          <li><div><h3>Tell us what you need</h3><p>Answer three quick questions or call 071 608 8886.</p></div></li>
+          <li><div><h3>Tell us what you need</h3><p>Answer a few quick questions or call 071 608 8886.</p></div></li>
           <li><div><h3>Consultation and design</h3><p>We talk through your power needs and design a system to suit them.</p></div></li>
           <li><div><h3>Supply and installation</h3><p>Our team supplies Tier 1 equipment and installs your system.</p></div></li>
           <li><div><h3>Monitoring and maintenance</h3><p>We monitor and maintain the system after it is switched on.</p></div></li>
@@ -475,16 +522,16 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
 
   /* ---------- Quote form: three steps; forward slides in from the right, back from the left ---------- */
   var form=document.getElementById('quote-form'), steps=form.querySelectorAll('.step'), bar=document.getElementById('bar'),
-      count=document.getElementById('stepcount'), current=1;
+      count=document.getElementById('stepcount'), current=1, TOTAL=6;
   var stepSpring=new Spring(function(x){ var el=form.querySelector('.step[data-step="'+current+'"]'); if(el){ el.style.transform='translate3d('+x+'px,0,0)'; el.style.opacity=String(Math.max(0,1-Math.abs(x)/60)); } });
   function show(n,dir){
     current=n;
     steps.forEach(function(s){ s.hidden = Number(s.dataset.step)!==n; s.style.transform=''; s.style.opacity=''; });
-    bar.style.width = (n>=4?100:(n/3)*100)+'%';
-    count.textContent = n>=4 ? 'Done' : 'Step '+n+' of 3';
+    bar.style.width = (n>TOTAL?100:(n/TOTAL)*100)+'%';
+    count.textContent = n>TOTAL ? 'Done' : 'Step '+n+' of '+TOTAL;
     stepSpring.set(dir*48); stepSpring.to(0,{damping:1,response:0.35});
     var el=form.querySelector('.step[data-step="'+n+'"]');
-    var focusable = n===3 ? document.getElementById('f-name') : (n===4 ? el : el.querySelector('.opt[aria-pressed="true"]')||el.querySelector('.opt'));
+    var focusable = n===TOTAL ? document.getElementById('f-name') : (n>TOTAL ? el : el.querySelector('.opt[aria-pressed="true"]')||el.querySelector('.opt'));
     if(focusable && document.activeElement && form.contains(document.activeElement)) focusable.focus({preventScroll:true});
   }
   form.querySelectorAll('.options').forEach(function(group){
@@ -498,16 +545,17 @@ footer .legal{grid-column:1/-1;font-size:.88rem;color:#aeb7dc}
   form.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click',function(){ show(current-1,-1); }); });
   function setErr(input,msgEl,msg){ input.setAttribute('aria-invalid', msg?'true':'false'); msgEl.textContent=msg||''; }
   form.addEventListener('submit',function(e){
-    var name=document.getElementById('f-name'), phone=document.getElementById('f-phone');
-    var okName=name.value.trim().length>1, okPhone=phone.value.replace(/\D/g,'').length>=9;
+    var name=document.getElementById('f-name'), phone=document.getElementById('f-phone'), address=document.getElementById('f-address');
+    var okName=name.value.trim().length>1, okPhone=phone.value.replace(/\D/g,'').length>=9, okAddress=address.value.trim().length>4;
     setErr(name,document.getElementById('e-name'), okName?'':'Please add your name.');
     setErr(phone,document.getElementById('e-phone'), okPhone?'':'Please add a number we can call, e.g. 071 123 4567.');
-    if(!okName||!okPhone){ e.preventDefault(); (okName?phone:name).focus(); return; }
-    track('generate_lead',{need:document.getElementById('need').value, property:document.getElementById('property').value});
+    setErr(address,document.getElementById('e-address'), okAddress?'':'Please add the address where the system will go.');
+    if(!okName||!okPhone||!okAddress){ e.preventDefault(); (!okName?name:(!okPhone?phone:address)).focus(); return; }
+    track('generate_lead',{need:document.getElementById('need').value, property:document.getElementById('property').value, roof:document.getElementById('roof').value, inverter_distance:document.getElementById('inverter_distance').value, monthly_spend:document.getElementById('monthly_spend').value});
     if(CONCEPT){
       e.preventDefault();
       document.getElementById('done-msg').textContent='Concept preview: on the live page this request goes straight to Graaff & Kie, and they get back to you with an estimate.';
-      show(4,1);
+      show(TOTAL+1,1);
     }
   });
 
